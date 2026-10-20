@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import localFont from 'next/font/local'
 import clsx from 'clsx'
 
+import { siteUrl } from '@/app/site'
 import '@/styles/tailwind.css'
 
 const inter = Inter({
@@ -20,6 +21,7 @@ const doto = localFont({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
     template: '%s - d0dge',
     default: 'd0dge: glyph survival',
