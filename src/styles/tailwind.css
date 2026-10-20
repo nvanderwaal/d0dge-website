@@ -1,0 +1,122 @@
+@import 'tailwindcss';
+
+@plugin '@tailwindcss/forms';
+
+/*
+ * The game's four colour roles (GDD §10). Every palette is tinted monochrome
+ * with the same brightness hierarchy: phosphor > signal > grid > void.
+ * The values mirror D0dge.Core/Presentation/Palettes.cs.
+ */
+:root {
+  --void: #080808;
+  --phosphor: #f5f5f0;
+  --grid: #444444;
+  --signal: #bdbdbd;
+  color-scheme: dark;
+}
+
+:root[data-palette='amber'] {
+  --void: #0a0703;
+  --phosphor: #ffb547;
+  --grid: #45311a;
+  --signal: #d9a35a;
+}
+
+:root[data-palette='ice'] {
+  --void: #04070c;
+  --phosphor: #a6d4ff;
+  --grid: #2d3b4e;
+  --signal: #7fa6d6;
+}
+
+:root[data-palette='terminal'] {
+  --void: #040805;
+  --phosphor: #7dffa0;
+  --grid: #22472d;
+  --signal: #63c27e;
+}
+
+:root[data-palette='rose'] {
+  --void: #0a0507;
+  --phosphor: #ffb8cb;
+  --grid: #4a3038;
+  --signal: #d495a7;
+}
+
+@theme {
+  --text-*: initial;
+  --text-xs: 0.75rem;
+  --text-xs--line-height: 1rem;
+  --text-sm: 0.875rem;
+  --text-sm--line-height: 1.5rem;
+  --text-base: 1rem;
+  --text-base--line-height: 1.5rem;
+  --text-lg: 1.125rem;
+  --text-lg--line-height: 2rem;
+  --text-xl: 1.25rem;
+  --text-xl--line-height: 1.75rem;
+  --text-2xl: 1.5rem;
+  --text-2xl--line-height: 2rem;
+  --text-3xl: 2rem;
+  --text-3xl--line-height: 3rem;
+  --text-4xl: 2.5rem;
+  --text-4xl--line-height: 3rem;
+  --text-5xl: 3rem;
+  --text-5xl--line-height: 1;
+  --text-6xl: 3.75rem;
+  --text-6xl--line-height: 1;
+  --text-7xl: 4.5rem;
+  --text-7xl--line-height: 1;
+
+  --animate-spin-slow: spin 4s linear infinite;
+  --animate-spin-slower: spin 6s linear infinite;
+  --animate-spin-reverse-slower: spin-reverse 6s linear infinite;
+
+  --font-sans: var(--font-inter);
+  --font-dot: var(--font-doto);
+
+  --container-2xl: 40rem;
+
+  @keyframes spin-reverse {
+    to {
+      transform: rotate(-360deg);
+    }
+  }
+}
+
+@theme inline {
+  --color-void: var(--void);
+  --color-phosphor: var(--phosphor);
+  --color-grid: var(--grid);
+  --color-signal: var(--signal);
+}
+
+@layer base {
+  body {
+    background-color: var(--void);
+    color: var(--phosphor);
+    transition:
+      background-color 0.4s,
+      color 0.4s;
+  }
+
+  ::selection {
+    background-color: var(--phosphor);
+    color: var(--void);
+  }
+}
+
+/* Doto with fully round dots, as in the game (GDD §10, Typography). */
+.font-dot {
+  font-family: var(--font-dot);
+  font-variation-settings: 'ROND' 100;
+  font-weight: 900;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-spin-slow,
+  .animate-spin-slower,
+  .animate-spin-reverse-slower {
+    animation: none;
+  }
+}
