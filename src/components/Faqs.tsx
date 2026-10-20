@@ -1,6 +1,7 @@
 import Link from 'next/link'
 
 import { Container } from '@/components/Container'
+import { closedTestUrl } from '@/app/site'
 
 const faqs = [
   [
@@ -8,6 +9,22 @@ const faqs = [
       question: 'When can I play?',
       answer:
         'd0dge is in development. It will launch on iOS and Android at the same time, after a TestFlight beta and a Google Play closed test.',
+    },
+    {
+      question: 'How do I join the Android test?',
+      answer: (
+        <>
+          Join the{' '}
+          <a
+            href={closedTestUrl}
+            className="text-phosphor underline decoration-grid underline-offset-4 hover:decoration-phosphor"
+          >
+            d0dge tester group
+          </a>{' '}
+          on Google Groups with the Google account you use on your phone. The
+          pinned post there walks you through getting the game from Google Play.
+        </>
+      ),
     },
     {
       question: 'Which devices are supported?',
