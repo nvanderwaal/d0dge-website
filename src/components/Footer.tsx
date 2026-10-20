@@ -1,8 +1,8 @@
+import Link from 'next/link'
+
 import { Container } from '@/components/Container'
 import { Logomark } from '@/components/Logo'
 import { NavLinks } from '@/components/NavLinks'
-
-export const privacyPolicyUrl = 'https://webvorming.nl/apps/dodge'
 
 export function Footer() {
   return (
@@ -27,12 +27,12 @@ export function Footer() {
               Steam Deck after the mobile release.
             </p>
             <p className="mt-4">
-              <a
-                href={privacyPolicyUrl}
+              <Link
+                href="/privacy/"
                 className="tracking-widest text-phosphor uppercase underline decoration-grid underline-offset-4 hover:decoration-phosphor"
               >
                 Privacy policy
-              </a>
+              </Link>
             </p>
           </div>
         </div>

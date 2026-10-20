@@ -1,5 +1,6 @@
+import Link from 'next/link'
+
 import { Container } from '@/components/Container'
-import { privacyPolicyUrl } from '@/components/Footer'
 
 const faqs = [
   [
@@ -51,12 +52,12 @@ const faqs = [
       answer: (
         <>
           Your progress lives on your device. Read the{' '}
-          <a
-            href={privacyPolicyUrl}
+          <Link
+            href="/privacy/"
             className="text-phosphor underline decoration-grid underline-offset-4 hover:decoration-phosphor"
           >
             privacy policy
-          </a>{' '}
+          </Link>{' '}
           for the details on ads and purchases.
         </>
       ),
