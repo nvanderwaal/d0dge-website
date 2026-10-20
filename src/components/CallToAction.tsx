@@ -5,12 +5,66 @@ import { useEffect, useState } from 'react'
 import { Container } from '@/components/Container'
 import { DotField } from '@/components/DotField'
 
-// The daily seed comes from the UTC date, so the page shows it in UTC too.
+// Regions that write the month first, and the ones that write the year first.
+// Mirrors D0dge.Core/Presentation/DateText.cs (#131), so the site writes the
+// date the way the game's DAILY page does.
+const monthFirst = new Set([
+  'US',
+  'PR',
+  'PH',
+  'FM',
+  'MH',
+  'PW',
+  'GU',
+  'VI',
+  'AS',
+  'MP',
+  'BZ',
+])
+const yearFirst = new Set([
+  'CN',
+  'JP',
+  'KR',
+  'KP',
+  'TW',
+  'MN',
+  'HU',
+  'LT',
+  'SE',
+  'CA',
+  'IR',
+  'ZA',
+])
+
+// The region is the part of the locale that is two capital letters: "nl-NL", "zh-Hans-CN".
+function regionOf(locale: string) {
+  return locale
+    .split(/[.@]/)[0]
+    .split(/[-_]/)
+    .slice(1)
+    .find((part) => /^[A-Z]{2}$/.test(part))
+}
+
+function formatDate(date: Date, locale: string) {
+  let day = String(date.getUTCDate()).padStart(2, '0')
+  let month = String(date.getUTCMonth() + 1).padStart(2, '0')
+  let year = String(date.getUTCFullYear())
+  let region = regionOf(locale)
+
+  if (region && monthFirst.has(region)) {
+    return `${month}-${day}-${year}`
+  }
+  return region && yearFirst.has(region)
+    ? `${year}-${month}-${day}`
+    : `${day}-${month}-${year}`
+}
+
+// The daily seed comes from the UTC date, so the page shows the UTC date too.
 function useUtcDate() {
   let [date, setDate] = useState<string | null>(null)
 
   useEffect(() => {
-    let update = () => setDate(new Date().toISOString().slice(0, 10))
+    let update = () => setDate(formatDate(new Date(), navigator.language))
     update()
     let timer = window.setInterval(update, 60_000)
     return () => window.clearInterval(timer)
