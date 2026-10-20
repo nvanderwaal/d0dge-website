@@ -5,6 +5,7 @@ import { Container } from '@/components/Container'
 import { DotField } from '@/components/DotField'
 import { GridDemo } from '@/components/GridDemo'
 import { PhoneFrame } from '@/components/PhoneFrame'
+import { closedTestUrl } from '@/app/site'
 
 const facts = [
   ['1', 'finger'],
@@ -38,6 +39,15 @@ export function Hero() {
               <AppStoreLink store="apple" />
               <AppStoreLink store="google" />
             </div>
+            <p className="mt-4 text-sm text-signal">
+              On Android? The Google Play closed test is open.{' '}
+              <a
+                href={closedTestUrl}
+                className="text-phosphor underline decoration-grid underline-offset-4 hover:decoration-phosphor"
+              >
+                Join the tester group
+              </a>
+            </p>
             <div className="mt-6">
               <Button href="/#gameplay" variant="outline">
                 How it plays
